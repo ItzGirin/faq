@@ -17,6 +17,7 @@
       --shadow-color: rgba(0, 0, 0, 0.05);
       --border-radius: 0.75rem;
       --transition-speed: 0.3s;
+      --max-width: 1200px;
     }
 
     *, *::before, *::after {
@@ -33,80 +34,84 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding: 2rem 1rem;
+      padding: 4rem 1rem 4rem;
+      align-items: center;
     }
 
     main.container {
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
       width: 100%;
+      max-width: var(--max-width);
+      padding: 0 2rem;
     }
 
     h1 {
       font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 0.25rem;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
     }
 
     p.subtitle {
       font-weight: 500;
-      font-size: 1rem;
+      font-size: 1.125rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
     }
 
     form#question-form {
       background-color: var(--card-bg);
-      padding: 1.5rem 2rem;
+      padding: 2rem 2.5rem;
       border-radius: var(--border-radius);
-      box-shadow: 0 4px 8px var(--shadow-color);
-      margin-bottom: 2rem;
+      box-shadow: 0 8px 16px var(--shadow-color);
+      margin-bottom: 3rem;
       position: relative;
     }
 
     .form-group {
       position: relative;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
 
     .form-group textarea {
       width: 100%;
-      padding: 1.25rem 1rem 0.75rem 1rem;
+      padding: 1.5rem 1rem 1rem 1rem;
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 1.125rem;
       border: 1px solid #d1d5db;
       border-radius: 0.5rem;
       background-color: var(--input-bg);
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
       transition: border-color var(--transition-speed);
+      color: var(--text-color);
     }
     .form-group textarea:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 6px rgba(37, 99, 235, 0.4);
-      background-color: white;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.6);
+      background-color: #fff;
+      color: var(--text-color);
     }
 
     .form-group label {
       position: absolute;
-      top: 1rem;
+      top: 1.5rem;
       left: 1rem;
-      font-size: 1rem;
+      font-size: 1.125rem;
       color: var(--text-muted);
       pointer-events: none;
       transition: all 0.25s ease-in-out;
       background: var(--card-bg);
-      padding: 0 0.25rem;
+      padding: 0 0.4rem;
       user-select: none;
+      border-radius: 4px;
     }
 
     textarea:focus + label,
     textarea:not(:placeholder-shown) + label {
-      top: -0.5rem;
-      left: 0.8rem;
-      font-size: 0.75rem;
+      top: -0.6rem;
+      left: 0.9rem;
+      font-size: 0.85rem;
       color: var(--primary-color);
       font-weight: 600;
     }
@@ -114,80 +119,109 @@
     button[type="submit"] {
       background-color: var(--primary-color);
       color: white;
-      font-weight: 600;
-      font-size: 1.125rem;
-      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 0.85rem 2rem;
       border: none;
       border-radius: var(--border-radius);
       cursor: pointer;
       transition: background-color var(--transition-speed);
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
+      user-select: none;
     }
-    button[type="submit"]:hover {
+    button[type="submit"]:hover:not(:disabled) {
       background-color: #1d4ed8;
     }
-    button[type="submit"]:focus {
+    button[type="submit"]:focus-visible {
       outline: 3px solid #c7d2fe;
-      outline-offset: 2px;
+      outline-offset: 3px;
+    }
+    button[type="submit"]:disabled {
+      background-color: #93c5fd;
+      cursor: not-allowed;
     }
 
     section#comments-list {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      margin-bottom: 3rem;
-      min-height: 120px;
+      margin-bottom: 4rem;
+      min-height: 160px;
     }
 
     article.comment-card {
       background-color: var(--card-bg);
-      padding: 1rem 1.5rem;
+      padding: 1.5rem 2rem;
       border-radius: var(--border-radius);
-      box-shadow: 0 4px 10px var(--shadow-color);
-      transition: transform var(--transition-speed);
+      box-shadow: 0 8px 20px var(--shadow-color);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      will-change: transform;
     }
-    article.comment-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15);
+    article.comment-card:hover,
+    article.comment-card:focus {
+      transform: scale(1.03);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.15);
+      outline: none;
     }
 
     .comment-text {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.125rem;
+      margin-bottom: 0.6rem;
       white-space: pre-line;
       color: var(--text-color);
     }
     .comment-meta {
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
       user-select: none;
     }
 
     #empty-state {
-      font-size: 1rem;
+      font-size: 1.125rem;
       color: var(--text-muted);
       font-style: italic;
       text-align: center;
-      margin-top: 1rem;
+      margin-top: 2rem;
+      user-select: none;
     }
 
     #loading-spinner {
       text-align: center;
       color: var(--primary-color);
-      font-weight: 600;
-      font-size: 1.125rem;
+      font-weight: 700;
+      font-size: 1.25rem;
       user-select: none;
       padding: 2rem 0;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 3rem 1rem;
+      }
+      h1 {
+        font-size: 2.25rem;
+      }
+      form#question-form {
+        padding: 1.5rem 1.5rem;
+      }
+      section#comments-list {
+        margin-bottom: 3rem;
+      }
+      button[type="submit"] {
+        font-size: 1.125rem;
+        padding: 0.7rem 1.6rem;
+      }
     }
   </style>
 </head>
 <body>
   <main class="container" role="main" aria-label="Global Question and Answer Section">
     <h1>Ask a Question / Leave a Comment</h1>
-    <p class="subtitle">Your comments are shared live across all devices.</p>
+    <p class="subtitle">Your comments are saved and shared live across <strong>all devices</strong>.</p>
 
     <form id="question-form" aria-label="Submit a question or comment">
       <div class="form-group">
@@ -196,21 +230,21 @@
           name="question"
           placeholder=" "
           required
-          rows="4"
+          rows="5"
           aria-required="true"
-          aria-describedby="question-desc"
           maxlength="500"
+          aria-describedby="question-desc"
           ></textarea>
         <label for="question-input">Your question or comment</label>
       </div>
       <button type="submit" aria-live="polite" aria-atomic="true" aria-relevant="text">Post</button>
     </form>
 
-    <section id="comments-list" aria-live="polite" aria-relevant="additions" aria-label="List of questions and comments">
+    <section id="comments-list" aria-live="polite" aria-relevant="additions" aria-label="List of questions and comments" tabindex="0">
       <!-- Comments appear here -->
     </section>
-    <p id="empty-state">Loading comments...</p>
-    <p id="loading-spinner" style="display:none;">Loading...</p>
+    <p id="empty-state" hidden>No comments yet. Be the first to comment!</p>
+    <p id="loading-spinner" hidden>Loading comments...</p>
   </main>
 
   <!-- Firebase SDK -->
@@ -218,59 +252,60 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
   <script>
-    // TODO: Replace the below config with your project's Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyD-EXAMPLE-KEY-1234567890",
-  authDomain: "eternalsmp-project.firebaseapp.com",
-  projectId: "eternalsmp-project",
-  storageBucket: "eternalsmp-project.appspot.com",
-  messagingSenderId: "123456789012",
-  appId: "1:123456789012:web:abcdef123456"
-};
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD-EXAMPLE-KEY-1234567890",
+      authDomain: "eternalsmp-project.firebaseapp.com",
+      projectId: "eternalsmp-project",
+      storageBucket: "eternalsmp-project.appspot.com",
+      messagingSenderId: "123456789012",
+      appId: "1:123456789012:web:abcdef123456"
+    };
 
-    // Initialize Firebase
+    // Initialize Firebase app & Firestore
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // Elements
     const form = document.getElementById('question-form');
     const input = document.getElementById('question-input');
     const commentsList = document.getElementById('comments-list');
     const emptyState = document.getElementById('empty-state');
     const spinner = document.getElementById('loading-spinner');
+    const submitButton = form.querySelector('button[type="submit"]');
 
-    // Escape HTML to prevent injection
+    // Sanitize text to prevent injection
     function escapeHTML(str) {
-      return str.replace(/[&<>"'`=\/]/g, function(s) {
-        return ({
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;',
-          '`': '&#96;',
-          '=': '&#61;',
-          '/': '&#47;'
-        })[s];
-      });
+      return str.replace(/[&<>"'`=\/]/g, s => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '`': '&#96;',
+        '=': '&#61;',
+        '/': '&#47;'
+      }[s]));
     }
 
+    // Render comments list in ascending order
     function renderComments(comments) {
       commentsList.innerHTML = '';
       if (comments.length === 0) {
-        emptyState.textContent = 'No comments yet. Be the first to comment!';
-        emptyState.style.display = 'block';
+        emptyState.hidden = false;
         return;
       }
-      emptyState.style.display = 'none';
+      emptyState.hidden = true;
+
       comments.forEach(({ id, text, timestamp }) => {
         const article = document.createElement('article');
         article.className = 'comment-card';
-        article.setAttribute('tabindex', '0');
+        article.tabIndex = 0;
         article.setAttribute('aria-label', `Comment posted on ${new Date(timestamp).toLocaleString()}`);
 
         const pText = document.createElement('p');
         pText.className = 'comment-text';
-        // text is escaped to prevent XSS, convert newlines to <br>
+        // Preserve line breaks safely
         pText.innerHTML = escapeHTML(text).replace(/\n/g, '<br>');
 
         const pMeta = document.createElement('p');
@@ -283,31 +318,49 @@ const firebaseConfig = {
       });
     }
 
-    // Real-time listener for comments collection
-    function setupRealtimeListener() {
-      spinner.style.display = 'block';
-      db.collection('comments')
+    // Show loading spinner
+    function showLoading() {
+      spinner.hidden = false;
+      emptyState.hidden = true;
+      commentsList.hidden = true;
+    }
+
+    // Hide loading spinner and show comments
+    function hideLoading() {
+      spinner.hidden = true;
+      commentsList.hidden = false;
+    }
+
+    // Listen for real-time Firestore comments updates
+    function listenComments() {
+      showLoading();
+
+      return db.collection('comments')
         .orderBy('timestamp', 'asc')
         .onSnapshot(snapshot => {
-          spinner.style.display = 'none';
+          hideLoading();
+
           if (snapshot.empty) {
             renderComments([]);
             return;
           }
+
           const comments = [];
           snapshot.forEach(doc => {
             comments.push({ id: doc.id, ...doc.data() });
           });
+
           renderComments(comments);
         }, error => {
-          spinner.style.display = 'none';
-          emptyState.textContent = 'Error loading comments. Please try again later.';
-          emptyState.style.display = 'block';
-          console.error('Firestore error:', error);
+          hideLoading();
+          emptyState.textContent = 'Failed to load comments. Please try again later.';
+          emptyState.hidden = false;
+          console.error('Error loading comments:', error);
+          alert('Error loading comments: ' + error.message);
         });
     }
 
-    // Add new comment to Firestore
+    // Add comment to Firestore
     async function addComment(text) {
       try {
         await db.collection('comments').add({
@@ -315,23 +368,25 @@ const firebaseConfig = {
           timestamp: Date.now()
         });
       } catch (error) {
+        console.error('Failed to post comment:', error);
         alert('Failed to post comment: ' + error.message);
       }
     }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    // Handle form submit
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
       const text = input.value.trim();
       if (text.length === 0) return;
-      form.querySelector('button[type="submit"]').disabled = true;
+      submitButton.disabled = true;
       await addComment(text);
       input.value = '';
       input.focus();
-      form.querySelector('button[type="submit"]').disabled = false;
+      submitButton.disabled = false;
     });
 
-    // Initialize realtime comment loading
-    setupRealtimeListener();
+    // Start listening on page load
+    listenComments();
   </script>
 </body>
 </html>
